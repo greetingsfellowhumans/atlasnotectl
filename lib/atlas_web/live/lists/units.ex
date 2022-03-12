@@ -1,30 +1,58 @@
 defmodule AtlasWeb.Live.Lists.Units do
-  #use AtlasWeb, :live_component
   use AtlasWeb, :component
   alias AtlasWeb.Live.Lists.Notes
 
   def render(assigns) do
-    tech_id = Map.get(assigns, :tech_id)
-    call_id = Map.get(assigns, :call_id)
     ~H"""
     <div>
-      <h1>In Progress</h1>
-      <%= for {id, unit} <- @portals.unit do %>
-        <%= if !is_complete?(call_id, id, @portals) do %>
-          <.render_unit portals={@portals} call_id={@call_id} tech_id={@tech_id} unit={unit} />
-        <% end %>
-      <% end %>
-
-
-      <h1>Complete</h1>
-      <%= for {id, unit} <- @portals.unit do %>
-        <%= if is_complete?(call_id, id, @portals) do %>
-          <.render_unit portals={@portals} call_id={@call_id} tech_id={@tech_id} unit={unit} />
-        <% end %>
-      <% end %>
+      <.render_pending portals={@portals} call_id={@call_id} tech_id={@tech_id} />
+      <.render_complete portals={@portals} call_id={@call_id} tech_id={@tech_id} />
     </div>
     """
   end
+
+  ### PENDING ####
+  defp render_pending(assigns) do
+    ~H"""
+      <% pending_units = units_in_progress(assigns) %>
+      <%= if !Enum.empty?(pending_units) do %>
+        <h1>In Progress</h1>
+        <%= for unit <- pending_units do %>
+          <.render_unit portals={@portals} call_id={@call_id} tech_id={@tech_id} unit={unit} />
+        <% end %>
+      <% end %>
+    """
+  end
+
+  defp units_in_progress(%{call_id: call_id, portals: portals}) do
+    Enum.reduce(portals.unit, [], fn {id, unit}, acc -> 
+      if !is_complete?(call_id, id, portals), do: [unit | acc], else: acc
+    end)
+  end
+  ################
+  
+  
+  ### COMPLETED ###
+  defp render_complete(assigns) do
+    ~H"""
+      <% completed_units = units_not_in_progress(assigns) %>
+      <%= if !Enum.empty?(completed_units) do %>
+        <h1>Complete</h1>
+        <%= for unit <- completed_units do %>
+          <.render_unit portals={@portals} call_id={@call_id} tech_id={@tech_id} unit={unit} />
+        <% end %>
+      <% end %>
+    """
+  end
+
+  defp units_not_in_progress(%{call_id: call_id, portals: portals}) do
+    Enum.reduce(portals.unit, [], fn {id, unit}, acc -> 
+      if is_complete?(call_id, id, portals), do: [unit | acc], else: acc
+    end)
+  end
+  ##################
+
+
 
   defp render_unit(assigns) do
     ~H"""
