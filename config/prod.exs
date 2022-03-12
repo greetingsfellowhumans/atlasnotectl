@@ -1,5 +1,13 @@
 import Config
 
+config :atlas, Atlas.Repo,
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "atlas_prod",
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
+
 # For production, don't forget to configure the url host
 # to something meaningful, Phoenix uses this information
 # when generating URLs.

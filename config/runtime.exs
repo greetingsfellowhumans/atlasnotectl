@@ -13,18 +13,22 @@ if System.get_env("PHX_SERVER") && System.get_env("RELEASE_NAME") do
 end
 
 if config_env() == :prod do
-  database_url =
-    System.get_env("DATABASE_URL") ||
-      raise """
-      environment variable DATABASE_URL is missing.
-      For example: ecto://USER:PASS@HOST/DATABASE
-      """
+  database_url = "ecto://postgres:postgres@localhost/atlas_prod"
+    # System.get_env("DATABASE_URL") || 
+    #  raise """
+    #  environment variable DATABASE_URL is missing.
+    #  For example: ecto://USER:PASS@HOST/DATABASE
+    #  """
 
   maybe_ipv6 = if System.get_env("ECTO_IPV6"), do: [:inet6], else: []
 
   config :atlas, Atlas.Repo,
     # ssl: true,
-    url: database_url,
+    #url: database_url,
+    username: "postgres",
+    password: "postgres",
+    hostname: "localhost",
+    database: "atlas_prod",
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
     socket_options: maybe_ipv6
 
@@ -34,17 +38,19 @@ if config_env() == :prod do
   # to check this value into version control, so we use an environment
   # variable instead.
   secret_key_base =
-    System.get_env("SECRET_KEY_BASE") ||
+    System.get_env("SECRET_KEY_BASE") || "ik7YSwMCXM4LB2yYcOtQAKMvqniEglZLXD/NVa2g/8JG7B2aAyhC4I/6u/gYR9TV" ||
       raise """
       environment variable SECRET_KEY_BASE is missing.
       You can generate one by calling: mix phx.gen.secret
       """
 
-  host = System.get_env("PHX_HOST") || "example.com"
+  host = System.get_env("PHX_HOST") || "https://atlasnotecontrol.com"
   port = String.to_integer(System.get_env("PORT") || "4000")
 
   config :atlas, AtlasWeb.Endpoint,
+    server: true,
     url: [host: host, port: 443],
+    check_origin: ["https://atlasnotecontrol.com"],
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
