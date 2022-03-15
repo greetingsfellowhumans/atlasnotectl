@@ -33,10 +33,11 @@ defmodule AtlasWeb.Live.Lists.Notes do
     unit_num = assigns.portals.unit[assigns.unit_id].unit_number
     ~H"""
     <%= if @note.complete do %>
-      <div style="margin: 1rem; padding: 1rem; background-color: #AEA">
+      <div style="margin: 1rem; text-align: center; padding: 1rem; background-color: #AEA">
         Unit #<%= unit_num %> <.author note={@note} portals={@portals} /><br />
         <%= if @note.tech_id == @tech_id do %>
           <button 
+            style="width: 100%"
             phx-value-complete={"false"} 
             phx-click={"open-unit-note:#{@note.id}"}>
               Edit

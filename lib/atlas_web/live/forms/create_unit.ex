@@ -4,6 +4,8 @@ defmodule AtlasWeb.Live.Forms.CreateUnit do
 
   def render(assigns) do
     ~H"""
+    <div style="margin-top: 1rem;">
+    <hr />
     <.form
       let={f}
       phx_submit="create_unit_submit"
@@ -15,6 +17,8 @@ defmodule AtlasWeb.Live.Forms.CreateUnit do
 
       <%= submit "Create Unit" %>
     </.form>
+    <hr />
+    </div>
     """
   end
 
