@@ -34,7 +34,7 @@ defmodule AtlasWeb.Live.Lists.Notes do
     ~H"""
     <%= if @note.complete do %>
       <div style="margin: 1rem; padding: 1rem; background-color: #AEA">
-        Unit # <%= unit_num %> <.author note={@note} portals={@portals} />
+        Unit #<%= unit_num %> <.author note={@note} portals={@portals} /><br />
         <%= if @note.tech_id == @tech_id do %>
           <button 
             phx-value-complete={"false"} 
@@ -46,7 +46,7 @@ defmodule AtlasWeb.Live.Lists.Notes do
       </div>
     <% else %>
       <div style="margin: 1rem; padding: 1rem; background-color: #EAA">
-        Unit # <%= unit_num %> <.author note={@note} portals={@portals} />
+        Unit #<%= unit_num %> <.author note={@note} portals={@portals} />
       </div>
     <% end %>
     """

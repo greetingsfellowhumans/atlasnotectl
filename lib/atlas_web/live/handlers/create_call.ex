@@ -15,16 +15,17 @@ defmodule AtlasWeb.Live.Handlers.CreateCall do
 
   def submit(%{"service_call" => attrs}, socket) do
     num = socket.assigns.location_number
-    cs = ServiceCall.create_changeset(%ServiceCall{location_number: num}, attrs)
-    case Repo.insert(cs) do
-      {:ok, service_call} ->
-        empty_cs = ServiceCall.create_changeset(%ServiceCall{}, %{})
-        socket = assign(socket, :changeset, empty_cs)
-        src_push!(%Sorcery.Src{changes_db: %{service_call: %{service_call.id => service_call}}})
-        {:noreply, socket}
-      _nope ->
-        {:noreply, socket}
-    end
+    call = Map.put(attrs, "location_number", num)
+    
+    Sorcery.Src.new(%{}, %{})
+    |> Map.put(:changes_db, %{
+      service_call: %{
+        "$sorcery:1" => call
+      }
+    })
+    |> src_push!
+    
+    {:noreply, socket}
   end
 
   def render(assigns), do: ~H""

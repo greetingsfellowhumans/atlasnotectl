@@ -102,7 +102,7 @@ defmodule AtlasWeb.Live.Pages.Print do
       <span>Unit # <%= @unit.unit_number %></span><br />
       <%= for note <- notes do %>
         <%= if note.refusal do %>
-          Refusal
+          Refusal<br />
         <% else %>
           <%= for k <- klist(call) do %>
             <.render_key note={note} k={k} />

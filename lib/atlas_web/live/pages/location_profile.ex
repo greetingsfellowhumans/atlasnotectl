@@ -40,7 +40,6 @@ defmodule AtlasWeb.Live.Pages.LocationProfile do
 
 
   def render(assigns) do
-    IO.inspect(assigns, label: "Ass")
     ~H"""
     <div>
       <%= render_top_data(assigns) %>

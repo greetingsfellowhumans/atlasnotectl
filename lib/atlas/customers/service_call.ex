@@ -35,6 +35,7 @@ defmodule Atlas.Customers.ServiceCall do
     |> validate_required(@callable)
   end
   def sorcery_insert(unit, attrs) do
+    IO.inspect(attrs, label: "CHANGESET ATTRS")
     unit
     |> cast(attrs, @callable)
     |> validate_required(@callable)

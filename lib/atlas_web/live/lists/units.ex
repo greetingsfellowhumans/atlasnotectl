@@ -70,7 +70,7 @@ defmodule AtlasWeb.Live.Lists.Units do
 
         <% else %>
 
-          Unit #<%= @unit.unit_number %> 
+          Unit #<%= @unit.unit_number %><br /> 
           <button 
             phx-value-tech_id={@tech_id}
             phx-value-call_id={@call_id}
