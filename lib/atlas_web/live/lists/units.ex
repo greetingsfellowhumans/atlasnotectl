@@ -37,6 +37,7 @@ defmodule AtlasWeb.Live.Lists.Units do
     ~H"""
       <% completed_units = units_not_in_progress(assigns) %>
       <%= if !Enum.empty?(completed_units) do %>
+        <hr />
         <h1>Complete</h1>
         <%= for unit <- completed_units do %>
           <.render_unit portals={@portals} call_id={@call_id} tech_id={@tech_id} unit={unit} />
