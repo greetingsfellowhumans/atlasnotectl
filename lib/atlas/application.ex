@@ -19,6 +19,7 @@ defmodule Atlas.Application do
       AtlasWeb.Endpoint,
 
       Atlas.SorceryStorage,
+      Sorcery.PortalMonitor,
       #{Sorcery.Storage.GenserverAdapter, name: Atlas.Storage},
       # Start a worker by calling: Atlas.Worker.start_link(arg)
       # {Atlas.Worker, arg}
