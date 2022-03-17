@@ -14,6 +14,12 @@ defmodule AtlasWeb.Live.Forms.EditNote do
         phx_submit={"edit-unit-note:#{@note.id}"}>
 
       <div style="display: flex;">
+        <%= checkbox f, :access %>
+        <%= label f, :access %>
+        <%= error_tag f, :access %>
+      </div>
+
+      <div style="display: flex;">
         <%= checkbox f, :refusal %>
         <%= label f, :refusal %>
         <%= error_tag f, :refusal %>

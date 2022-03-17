@@ -21,6 +21,7 @@ defmodule Atlas.Repo.Migrations.Call do
       add :trap_locations,       :boolean, default: false
       add :feeding,              :boolean, default: false
       add :refusal,              :boolean, default: true
+      add :access,               :boolean, default: true
       add :note,                 :boolean, default: true
 
     end
@@ -53,6 +54,7 @@ defmodule Atlas.Repo.Migrations.Call do
       add :trap_locations,       :text, default: nil
       add :feeding,              :text, default: nil
       add :refusal,              :boolean, default: false
+      add :access,               :boolean, default: true
       add :note,                 :text, default: nil
 
       timestamps()
