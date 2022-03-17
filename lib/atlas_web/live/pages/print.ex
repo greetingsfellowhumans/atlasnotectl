@@ -68,6 +68,7 @@ defmodule AtlasWeb.Live.Pages.Print do
   defp get_label(:trap_locations), do: "Trap Locations"
   defp get_label(:feeding), do: "Feeding"
   defp get_label(:refusal), do: "Refusal"
+  defp get_label(:access), do: "Access"
   defp get_label(_), do: ""
 
   def render(assigns) do
@@ -104,13 +105,16 @@ defmodule AtlasWeb.Live.Pages.Print do
       <div>
       <span>Unit # <%= @unit.unit_number %></span><br />
       <%= for note <- notes do %>
-        <%= if note.refusal do %>
-          Refusal<br />
-        <% else %>
-          <%= for k <- klist(call) do %>
-            <.render_key note={note} k={k} />
-          <% end %>
-          <.render_note note={note} />
+        <%= cond do %>
+          <% note.refusal -> %>
+            Refusal<br />
+          <% !note.access -> %>
+            No Access<br />
+            <% true -> %>
+              <%= for k <- klist(call) do %>
+                <.render_key note={note} k={k} />
+              <% end %>
+              <.render_note note={note} />
         <% end %>
 
       <% end %>
