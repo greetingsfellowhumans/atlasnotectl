@@ -15,7 +15,10 @@ defmodule Atlas.Customers.TechNote do
     field :num_mice_reported,    :string, default: "0"
     field :num_ants_seen,        :string, default: "0"
     field :num_ants_reported,    :string, default: "0"
+    field :num_flies_seen,       :string, default: "0"
+    field :num_flies_reported,   :string, default: "0"
     field :sanitation,           :string, default: "ok"
+    field :clutter,              :string, default: ""
     field :trap_locations,       :string, default: nil
     field :feeding,              :string, default: "none"
     field :refusal,              :boolean, default: false
@@ -23,7 +26,7 @@ defmodule Atlas.Customers.TechNote do
     timestamps()
   end
 
-  @callable [:call_id, :tech_id, :unit_id, :note, :num_roaches_seen, :num_roaches_reported, :num_mice_seen, :num_mice_reported, :num_ants_seen, :num_ants_reported, :sanitation, :trap_locations, :feeding, :refusal, :complete]
+  @callable [:call_id, :tech_id, :unit_id, :note, :num_roaches_seen, :num_roaches_reported, :num_mice_seen, :num_mice_reported, :num_ants_seen, :num_ants_reported, :sanitation, :trap_locations, :feeding, :refusal, :complete, :num_flies_seen, :num_flies_reported, :clutter]
   @required [:call_id, :tech_id]
 
   def create_changeset(unit, attrs) do

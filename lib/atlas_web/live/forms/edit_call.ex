@@ -16,7 +16,10 @@ defmodule AtlasWeb.Live.Forms.EditCall do
           :num_mice_reported, 
           :num_ants_seen, 
           :num_ants_reported, 
+          :num_flies_seen, 
+          :num_flies_reported, 
           :sanitation, 
+          :clutter, 
           :feeding]
 
   defp click(call), do: "toggle_call_key:#{call.id}"
@@ -32,9 +35,11 @@ defmodule AtlasWeb.Live.Forms.EditCall do
 
     <%= for k <- keys do %>
 
-      <%= label f, k %>
-      <%= checkbox f, k %>
-      <%= error_tag f, k %>
+      <div style="display: flex;">
+        <%= checkbox f, k %>
+        <%= label f, k %>
+        <%= error_tag f, k %>
+      </div>
 
     <% end %>
 
