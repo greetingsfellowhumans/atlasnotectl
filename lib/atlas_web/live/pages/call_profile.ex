@@ -86,19 +86,20 @@ defmodule AtlasWeb.Live.Pages.CallProfile do
     ~H"""
     <div>
 
+        <div style="display: flex; justify-content: space-between;">
+
+          <button 
+            phx-click="toggle_call_edit_mode">change fields</button>
+
+          <% url = "/location/#{@location_number}/call/#{@call_id}/print" %>
+          <%= button("View All Notes", to: url, method: :get) %>
+
+        </div>
+        <br />
+
       <h2><%= location.name %> </h2>
 
 
-        <div style="display: flex;">
-
-          <button 
-            phx-click="toggle_call_edit_mode">[edit]</button>
-
-          <% url = "/location/#{@location_number}/call/#{@call_id}/print" %>
-          <%= button("See Notes", to: url, method: :get) %>
-          
-
-        </div>
 
 
       <%= if @editing_call do %>
