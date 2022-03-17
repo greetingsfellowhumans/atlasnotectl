@@ -1,6 +1,7 @@
 <div style={"display: flex; justify-content: space-around;"}>
 <%= if @current_user do %>
   <div><%= @current_user.email %></div>
+  <div><%= link "Locations", to: "/locations" %></div>
   <div><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></div>
   <div><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></div>
 <% else %>
