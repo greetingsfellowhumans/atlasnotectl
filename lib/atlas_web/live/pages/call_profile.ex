@@ -85,14 +85,22 @@ defmodule AtlasWeb.Live.Pages.CallProfile do
     #call = assigns.portals.service_call[assigns.call_id]
     ~H"""
     <div>
+
       <h2><%= location.name %> </h2>
-        <div 
-          style="cursor: pointer; color: orange;" 
-          phx-click="toggle_call_edit_mode"
-          >[edit]</div>
-        <div>
-          <a href={"/location/#{@location_number}/call/#{@call_id}/print"}>[printable]</a>
+
+
+        <div style="display: flex;">
+
+          <button 
+            phx-click="toggle_call_edit_mode">[edit]</button>
+
+          <% url = "/location/#{@location_number}/call/#{@call_id}/print" %>
+          <%= button("See Notes", to: url, method: :get) %>
+          
+
         </div>
+
+
       <%= if @editing_call do %>
         <EditCall.render id="edit_call" portals={@portals} call_id={@call_id} />
       <% end %>

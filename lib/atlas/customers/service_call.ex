@@ -16,12 +16,15 @@ defmodule Atlas.Customers.ServiceCall do
     field :num_mice_reported, :boolean, default: false
     field :num_ants_seen, :boolean, default: false
     field :num_ants_reported, :boolean, default: false
+    field :num_flies_seen, :boolean, default: false
+    field :num_flies_reported, :boolean, default: false
     field :sanitation, :boolean, default: false
+    field :clutter, :boolean, default: false
     field :feeding, :boolean, default: false
     field :trap_locations, :boolean, default: false
   end
 
-  @callable [:start_date, :end_date, :location_number, :note, :num_roaches_reported, :num_roaches_seen, :num_mice_seen, :num_mice_reported, :num_ants_seen, :num_ants_reported, :sanitation, :feeding, :trap_locations, :refusal]
+  @callable [:start_date, :end_date, :location_number, :note, :num_roaches_reported, :num_roaches_seen, :num_mice_seen, :num_mice_reported, :num_ants_seen, :num_ants_reported, :sanitation, :feeding, :trap_locations, :refusal, :num_flies_reported, :num_flies_seen, :clutter]
 
   def create_changeset(unit, attrs) do
     unit

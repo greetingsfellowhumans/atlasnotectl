@@ -3,8 +3,6 @@ defmodule AtlasWeb.Live.Pages.Print do
   alias Atlas.Repo
   alias Atlas.SorceryStorage
   alias Atlas.Customers.{Location, Unit, ServiceCall, TechNote}
-  alias AtlasWeb.Live.Forms.{CreateNote, CreateUnit, EditNote, EditCall}
-  alias AtlasWeb.Live.Lists.{Calls, Units}
   import Atlas.Queries.Main
   use AtlasWeb.Live.Handlers.IncUnitNum
   use AtlasWeb.Live.Handlers.DeleteUnit
@@ -61,9 +59,12 @@ defmodule AtlasWeb.Live.Pages.Print do
   defp get_label(:num_roaches_reported), do: "Roaches Reported"
   defp get_label(:num_mice_seen), do: "Mice Seen"
   defp get_label(:num_mice_reported), do: "Mice Reported"
+  defp get_label(:num_flies_seen), do: "Flies Seen"
+  defp get_label(:num_flies_reported), do: "Flies Reported"
   defp get_label(:num_ants_seen), do: "Ants Seen"
   defp get_label(:num_ants_reported), do: "Ants Reported"
   defp get_label(:sanitation), do: "Sanitation"
+  defp get_label(:clutter), do: "Clutter"
   defp get_label(:trap_locations), do: "Trap Locations"
   defp get_label(:feeding), do: "Feeding"
   defp get_label(:refusal), do: "Refusal"
@@ -80,7 +81,9 @@ defmodule AtlasWeb.Live.Pages.Print do
   end
 
   defp klist(call), do: Enum.filter(
-    [:num_roaches_seen, :num_roaches_reported, :num_mice_seen, :num_mice_reported, :num_ants_seen, :num_ants_reported, :sanitation, :trap_locations, :feeding], 
+  [:num_roaches_seen, :num_roaches_reported, :num_mice_seen, :num_mice_reported, :num_ants_seen, :num_ants_reported,
+    :num_flies_seen, :num_flies_reported,
+    :sanitation, :clutter, :trap_locations, :feeding], 
     fn k -> Map.get(call, k)
   end)
 

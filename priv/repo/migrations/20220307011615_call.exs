@@ -14,7 +14,10 @@ defmodule Atlas.Repo.Migrations.Call do
       add :num_mice_reported,    :boolean, default: false
       add :num_ants_seen,        :boolean, default: false
       add :num_ants_reported,    :boolean, default: false
+      add :num_flies_seen,       :boolean, default: false
+      add :num_flies_reported,   :boolean, default: false
       add :sanitation,           :boolean, default: false
+      add :clutter,              :boolean, default: false
       add :trap_locations,       :boolean, default: false
       add :feeding,              :boolean, default: false
       add :refusal,              :boolean, default: true
@@ -43,6 +46,9 @@ defmodule Atlas.Repo.Migrations.Call do
       add :num_mice_reported,    :text, default: nil
       add :num_ants_seen,        :text, default: nil
       add :num_ants_reported,    :text, default: nil
+      add :num_flies_seen,       :text, default: nil
+      add :num_flies_reported,   :text, default: nil
+      add :clutter,              :text, default: nil
       add :sanitation,           :text, default: nil
       add :trap_locations,       :text, default: nil
       add :feeding,              :text, default: nil

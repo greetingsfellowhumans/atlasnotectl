@@ -13,9 +13,11 @@ defmodule AtlasWeb.Live.Forms.EditNote do
         let={f} 
         phx_submit={"edit-unit-note:#{@note.id}"}>
 
-      <%= label f, :refusal %>
-      <%= checkbox f, :refusal %>
-      <%= error_tag f, :refusal %>
+      <div style="display: flex;">
+        <%= checkbox f, :refusal %>
+        <%= label f, :refusal %>
+        <%= error_tag f, :refusal %>
+      </div>
 
       <%= for k <- [:note, :trap_locations] do %>
         <%= if Map.get(call, k) do %>
@@ -34,7 +36,10 @@ defmodule AtlasWeb.Live.Forms.EditNote do
                     :num_mice_reported, 
                     :num_ants_seen, 
                     :num_ants_reported, 
+                    :num_flies_seen, 
+                    :num_flies_reported, 
                     :sanitation, 
+                    :clutter, 
                     :feeding] do %>
 
         <%= if Map.get(call, k) do %>

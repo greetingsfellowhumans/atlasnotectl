@@ -15,18 +15,30 @@ defmodule AtlasWeb.Live.Pages.Locations do
     locations = Repo.all(Location)
     SorceryStorage.add_entities(:location, locations, %{})
     portal = %{tk: :location, guards: [{:>=, :id, 0}], indices: [:location_number]}
-    loc_portal_ref = SorceryStorage.create_portal(socket, portal, %{})
+    SorceryStorage.create_portal(socket, portal, %{})
     socket = assign_portals(socket)
+             |> assign(:creating?, false)
     
     {:ok, socket}
   end
 
+  def handle_event("toggle_creating", _, socket) do
+    creating = socket.assigns.creating?
+    {:noreply, assign(socket, :creating?, !creating)}
+  end
 
   def render(assigns) do
     ~H"""
     <div>
       <.live_component module={Locations} id="list_location" locations={@portals.location} />
-      <CreateLocation.render id="create_location" portals={@portals} />
+      <div style="margin-top: 2rem;">
+        <%= if @creating? do %>
+          <CreateLocation.render id="create_location" portals={@portals} />
+          <button phx-click="toggle_creating">Cancel</button>
+        <% else %>
+          <button phx-click="toggle_creating">New</button>
+        <% end %>
+      </div>
     </div>
     """
   end
