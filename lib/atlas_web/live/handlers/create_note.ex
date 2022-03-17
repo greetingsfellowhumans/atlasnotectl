@@ -5,7 +5,6 @@ defmodule AtlasWeb.Live.Handlers.CreateNote do
 
   use AtlasWeb, :live_view
 
-
   defmacro __using__(_) do
     quote do
 
@@ -15,7 +14,7 @@ defmodule AtlasWeb.Live.Handlers.CreateNote do
         call_id = String.to_integer(params["call_id"])
 
         src = %Sorcery.Src{
-          changes_db: %{tech_note: %{"$sorcery:1" => %{
+          changes_db: %{tech_note: %{"$sorcery:tech_note:1" => %{
             call_id: call_id,
             unit_id: unit_id,
             tech_id: tech_id

@@ -38,8 +38,6 @@ defmodule AtlasWeb.Live.Lists.Locations do
           [<%= loc.location_number %>]
           <%= loc.name %>
           </a>
-          <!-- button phx-click="inc_num", phx-value-location_id={loc.id} phx-target={@myself}>Inc Number</button>
-          <button phx-click="make_unit", phx-value-location_id={loc.id} phx-target={@myself}>Make Unit</button -->
         </div>
       <% end %>
     </div>

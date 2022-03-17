@@ -1,28 +1,26 @@
 defmodule AtlasWeb.Live.Handlers.CreateLocation do
+  alias Sorcery.Src
   alias Atlas.Repo
   alias Atlas.Customers.Location
-  import Phoenix.LiveView, only: [assign: 3]
 
+  defmacro __using__(_) do
+    quote do
+      def handle_event("create_location_submit", %{"location" => location}, socket) do
+        src = %Sorcery.Src{
+          changes_db: %{
+            location: %{
+              "$sorcery:location:1" => location
+            }
+          }
+        }
 
-  def change(%{"location" => attrs}, socket) do
-    cs = Location.create_changeset(%Location{}, attrs)
-    socket = assign(socket, :changeset, cs)
-    {:noreply, socket}
-  end
+        src_push!(src)
 
-
-  def submit(%{"location" => attrs}, socket) do
-    cs = Location.create_changeset(%Location{}, attrs)
-    case Repo.insert(cs) do
-      {:ok, _loc} ->
-        empty_cs = Location.create_changeset(%Location{}, %{})
-        socket = assign(socket, :changeset, empty_cs)
         {:noreply, socket}
-      nope ->
-        IO.inspect(nope, label: "nope")
-        {:noreply, socket}
+      end
+
+
     end
   end
-
 
 end

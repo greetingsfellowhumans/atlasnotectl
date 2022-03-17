@@ -20,5 +20,17 @@ defmodule Atlas.Customers.Location do
     |> validate_required([:location_number])
   end
 
+  
+  def sorcery_insert(location, attrs) do
+    location
+    |> cast(attrs, [:name, :location_number])
+    |> validate_required([:location_number, :name])
+  end
+  
+  def sorcery_update(location, attrs) do
+    location
+    |> cast(attrs, [:name, :location_number])
+    |> validate_required([:location_number, :name])
+  end
+  
 end
-

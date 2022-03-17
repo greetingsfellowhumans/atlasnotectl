@@ -8,7 +8,7 @@ defmodule AtlasWeb.Live.Handlers.CreateUnit do
         src = %Sorcery.Src{
           changes_db: %{
             unit: %{
-              "$sorcery:1" => %{
+              "$sorcery:unit:1" => %{
                 unit_number: unit_number,
                 location_number: location_number
               }

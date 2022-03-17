@@ -20,8 +20,8 @@ defmodule AtlasWeb.Live.Handlers.CreateCall do
     Sorcery.Src.new(%{}, %{})
     |> Map.put(:changes_db, %{
       service_call: %{
-        "$sorcery:1" => call
-      }
+        "$sorcery:service_call:1" => call
+      },
     })
     |> src_push!
     
