@@ -17,7 +17,7 @@ defmodule AtlasWeb.Live.Lists.Units do
       <% pending_units = units_in_progress(assigns) %>
       <%= if !Enum.empty?(pending_units) do %>
         <h1>In Progress</h1>
-        <%= for unit <- pending_units do %>
+        <%= for unit <- sort_units(pending_units) do %>
           <.render_unit portals={@portals} call_id={@call_id} tech_id={@tech_id} unit={unit} />
         <% end %>
       <% end %>
@@ -31,6 +31,12 @@ defmodule AtlasWeb.Live.Lists.Units do
   end
   ################
   
+  defp sort_units(units) do
+    Enum.sort_by(units, fn c ->
+      {int, _} = Integer.parse(c.unit_number)
+      int
+    end)
+  end
   
   ### COMPLETED ###
   defp render_complete(assigns) do
@@ -39,7 +45,7 @@ defmodule AtlasWeb.Live.Lists.Units do
       <%= if !Enum.empty?(completed_units) do %>
         <hr />
         <h1>Complete</h1>
-        <%= for unit <- completed_units do %>
+        <%= for unit <- sort_units(completed_units) do %>
           <.render_unit portals={@portals} call_id={@call_id} tech_id={@tech_id} unit={unit} />
         <% end %>
       <% end %>

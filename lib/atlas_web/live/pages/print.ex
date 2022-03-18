@@ -71,10 +71,17 @@ defmodule AtlasWeb.Live.Pages.Print do
   defp get_label(:access), do: "Access"
   defp get_label(_), do: ""
 
+  defp sort_units(units) do
+    Enum.sort_by(units, fn {_, c} ->
+      {int, _} = Integer.parse(c.unit_number)
+      int
+    end)
+  end
+
   def render(assigns) do
     ~H"""
     <div>
-      <%= for {_, unit} <- @portals.unit do %>
+      <%= for {_, unit} <- sort_units(@portals.unit) do %>
         <.render_unit portals={@portals} unit={unit} call_id={@call_id} />
       <% end %>
     </div>
