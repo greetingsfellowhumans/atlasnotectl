@@ -33,8 +33,10 @@ defmodule AtlasWeb.Live.Lists.Units do
   
   defp sort_units(units) do
     Enum.sort_by(units, fn c ->
-      {int, _} = Integer.parse(c.unit_number)
-      int
+      case Integer.parse(c.unit_number) do
+        {int, _} -> int
+        _ -> 0
+      end
     end)
   end
   

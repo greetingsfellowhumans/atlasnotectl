@@ -73,8 +73,10 @@ defmodule AtlasWeb.Live.Pages.Print do
 
   defp sort_units(units) do
     Enum.sort_by(units, fn {_, c} ->
-      {int, _} = Integer.parse(c.unit_number)
-      int
+      case Integer.parse(c.unit_number) do
+        {int, _} -> int
+        _ -> 0
+      end
     end)
   end
 
